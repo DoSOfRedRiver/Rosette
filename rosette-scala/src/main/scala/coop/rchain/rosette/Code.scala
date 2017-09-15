@@ -1,6 +1,6 @@
 package coop.rchain.rosette
 
-case class Code(override val entry: Seq[Ob],
+case class Code(override val parent: Ob,
                 override val meta: Ob,
                 override val slot: Seq[Ob])
     extends Ob {

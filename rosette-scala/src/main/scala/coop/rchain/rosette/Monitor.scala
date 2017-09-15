@@ -5,7 +5,7 @@ case class Monitor(id: Ob,
                    opcodeCounts: Map[Op, Long],
                    obCounts: Long,
                    tracing: Boolean,
-                   override val entry: Seq[Ob],
+                   override val parent: Ob,
                    override val meta: Ob,
                    override val slot: Seq[Ob])
     extends Ob {

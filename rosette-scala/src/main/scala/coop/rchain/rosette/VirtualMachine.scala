@@ -490,7 +490,7 @@ trait VirtualMachine {
   def execute(op: OpJmpCut, state: VMState): VMState = {
     val cut = op.m
 
-    val env = (1 to cut).foldLeft(state.ctxt.env)((env, _) => env.parent())
+    val env = (1 to cut).foldLeft(state.ctxt.env)((env, _) => env.parent)
 
     state
       .set(_ >> 'ctxt >> 'env)(env)
@@ -546,7 +546,7 @@ trait VirtualMachine {
   def execute(op: OpXferLexToArg, state: VMState): VMState = {
     val level = op.l
 
-    val env = (1 to level).foldLeft(state.ctxt.env)((env, _) => env.parent())
+    val env = (1 to level).foldLeft(state.ctxt.env)((env, _) => env.parent)
 
     val slot = if (op.i) {
       val actor = Actor(env)
@@ -561,7 +561,7 @@ trait VirtualMachine {
   def execute(op: OpXferLexToReg, state: VMState): VMState = {
     val level = op.l
 
-    val env = (1 to level).foldLeft(state.ctxt.env)((env, _) => env.parent())
+    val env = (1 to level).foldLeft(state.ctxt.env)((env, _) => env.parent)
 
     val slot = if (op.i) {
       val actor = Actor(env)

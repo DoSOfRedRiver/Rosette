@@ -10,7 +10,7 @@ case object Upcall extends LookupError
 trait Base
 
 trait Ob extends Base {
-  val entry: Seq[Ob]
+  val parent: Ob
   val meta: Ob
   val slot: Seq[Ob]
   val isRblFalse = false
@@ -22,10 +22,14 @@ trait Ob extends Base {
     null
   def getLex(ind: Int, level: Int, offset: Int): Ob = null
   def is(value: Ob.ObTag): Boolean = true
+  def isA[T]: Boolean = this.meta match {
+    case _: T => true
+    case _ => false
+  }
   def lookupOBO(meta: Ob, ob: Ob, key: Ob): Either[LookupError, Ob] =
     Right(null)
+  def matches(ctxt: Ctxt): Boolean = false
   def numberOfSlots(): Int = Math.max(0, slot.length - 2)
-  def parent(): Ob = null
   def setAddr(ind: Int, level: Int, offset: Int, value: Ob): Option[Ob] = None
   def setField(ind: Int,
                level: Int,
@@ -36,6 +40,12 @@ trait Ob extends Base {
 }
 
 object Ob {
+  object NIV extends Ob {
+    override val parent: Ob = null
+    override val meta: Ob = null
+    override val slot: Seq[Ob] = null
+  }
+
   sealed trait ObTag
   case object OTptr extends ObTag
   case object OTsym extends ObTag

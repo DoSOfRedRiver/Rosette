@@ -2,7 +2,7 @@ package coop.rchain.rosette
 
 case class Location(atom: Ob,
                     genericType: Location.GenericType,
-                    override val entry: Seq[Ob],
+                    override val parent: Ob,
                     override val meta: Ob,
                     override val slot: Seq[Ob])
     extends Ob

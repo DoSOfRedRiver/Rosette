@@ -1,6 +1,6 @@
 package coop.rchain.rosette
 
-case class Prim(override val entry: Seq[Ob],
+case class Prim(override val parent: Ob,
                 override val meta: Ob,
                 override val slot: Seq[Ob])
     extends Ob {
